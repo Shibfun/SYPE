@@ -341,7 +341,7 @@
             {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getVerifiedNFTs","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},
             {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getVerifiedNFTCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
             {"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"getAddressInfo","outputs":[{"internalType":"uint256","name":"balance","type":"uint256"},{"internalType":"uint256","name":"verifiedNFTCount","type":"uint256"},{"internalType":"uint256","name":"pendingRewards","type":"uint256"},{"internalType":"uint256","name":"lastClaimBlock","type":"uint256"}],"stateMutability":"view","type":"function"},
-            {"inputs":[{"internalType":"uint256","name":"page","type":"uint256"},{"internalType":"uint256","name":"pageSize","type":"uint256"},"name":"getAllVerifiedNFTs","outputs":[{"components":[{"internalType":"address","name":"verifier","type":"address"},{"internalType":"uint256","name":"nftId","type":"uint256"}],"internalType":"struct Sype.VerifiedNFT[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},
+            {"inputs":[{"internalType":"uint256","name":"page","type":"uint256"},{"internalType":"uint256","name":"pageSize","type":"uint256"}],"name":"getAllVerifiedNFTs","outputs":[{"components":[{"internalType":"address","name":"verifier","type":"address"},{"internalType":"uint256","name":"nftId","type":"uint256"}],"internalType":"struct Sype.VerifiedNFT[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},
             {"inputs":[],"name":"getAllVerifiedNFTsCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
             {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
             {"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},
@@ -351,9 +351,6 @@
             {"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},
             {"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},
             {"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}
-        ];
-        const erc721Abi = [
-            {"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
         ];
 
         function shortenAddress(address) {
@@ -465,7 +462,7 @@
                     </div>
                     <div class="card-content">
                         <h4>SYPE Mining</h4>
-                        <p class="description">Verify your NFTs to mine SYPE tokens on Shibarium. Each verified NFT earns 500 SYPE per block.</p>
+                        <p class="description">Verify your NFTs to mine SYPE tokens on Shibarium. Each verified NFT earns 500 SYPE per block, up to 200 NFTs per address.</p>
                     </div>
                     <div class="action-section">
                         <div class="action-box">
@@ -580,7 +577,7 @@
                 showStatus("NFT verified successfully!");
                 await loadActionCard();
             } catch (e) {
-                const msg = e.code === 4001 ? "User rejected transaction." : e.message.includes("revert") ? "Verification failed: Invalid NFT or already verified." : e.message;
+                const msg = e.code === 4001 ? "User rejected transaction." : e.message.includes("revert") ? "Verification failed: Invalid NFT, not owned, or already verified." : e.message;
                 showStatus(`Verification failed: ${msg}`, true);
             } finally {
                 button.classList.remove("loading");
@@ -593,7 +590,7 @@
                 showStatus("Please connect wallet.", true);
                 return;
             }
-            const pendingRewards = await contract.methods.getAddressInfo(account).call().pendingRewards;
+            const pendingRewards = (await contract.methods.getAddressInfo(account).call()).pendingRewards;
             if (web3.utils.toBN(pendingRewards).isZero()) {
                 showStatus("No rewards to claim.", true);
                 return;
