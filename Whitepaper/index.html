@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sype Whitepaper</title>
+    <link rel="icon" type="image/png" href="https://shibarium.fun/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #121212;
+            color: #E0E0E0;
+            min-height: 100vh;
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: #1E1E1E;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #FF8C00;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1rem;
+            color: #B0B0B0;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #FFA500;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #FF8C00;
+            padding-bottom: 5px;
+        }
+        .section h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #FF8C00;
+            margin: 20px 0 10px;
+        }
+        .section p {
+            font-size: 1rem;
+            color: #E0E0E0;
+            margin-bottom: 15px;
+        }
+        .section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .section ul li {
+            font-size: 1rem;
+            color: #E0E0E0;
+            margin-bottom: 8px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .table th, .table td {
+            padding: 10px;
+            border: 1px solid #333;
+            text-align: left;
+        }
+        .table th {
+            background: #252525;
+            color: #FF8C00;
+            font-weight: 600;
+        }
+        .table td {
+            background: #1E1E1E;
+            color: #E0E0E0;
+        }
+        .highlight {
+            background: #252525;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: #E0E0E0;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #B0B0B0;
+            margin-top: 40px;
+        }
+        .footer a {
+            color: #FF8C00;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer a:hover {
+            color: #FFA500;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+            }
+            .container {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .section h2 {
+                font-size: 1.5rem;
+            }
+            .section h3 {
+                font-size: 1.2rem;
+            }
+            .section p, .section ul li {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sype Whitepaper</h1>
+            <p>Decentralized NFT Mining on Shibarium</p>
+            <p>Version 1.0 | June 2025</p>
+        </div>
+
+        <div class="section">
+            <h2>Abstract</h2>
+            <p>Sype is a decentralized token protocol deployed on the Shibarium blockchain, designed to incentivize NFT ownership through a unique mining mechanism. By verifying eligible NFTs, users can mine SYPE tokens at a rate of 500 SYPE per block per verified NFT, with a maximum of 200 NFTs per address. Sype leverages the efficiency and low-cost transactions of Shibarium to create a seamless and rewarding experience for NFT holders, fostering community engagement and economic activity within the Shibarium ecosystem.</p>
+        </div>
+
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>The rise of Non-Fungible Tokens (NFTs) has transformed digital ownership, enabling unique assets to be traded and collected on blockchain networks. Sype introduces an innovative approach to NFT utility by allowing holders to mine SYPE tokens, a native ERC-20 token on Shibarium, through NFT verification. This whitepaper outlines the vision, mechanics, technical details, and roadmap of the Sype protocol, deployed at contract address <span class="highlight">0x0cd461B4897106f86F59b43fcF38Cfc11081b6A8</span>.</p>
+            <h3>Shibarium: The Foundation</h3>
+            <p>Shibarium, a layer-2 scaling solution for Ethereum, offers low transaction fees and high throughput, making it an ideal platform for Sype. By leveraging Shibarium’s infrastructure, Sype ensures cost-effective interactions for users, enabling widespread adoption of its NFT mining model.</p>
+        </div>
+
+        <div class="section">
+            <h2>Tokenomics</h2>
+            <h3>SYPE Token</h3>
+            <p>SYPE is an ERC-20 token with the following specifications:</p>
+            <table class="table">
+                <tr><th>Name</th><td>Shibarium Hype</td></tr>
+                <tr><th>Symbol</th><td>SYPE</td></tr>
+                <tr><th>Decimals</th><td>18</td></tr>
+                <tr><th>Maximum Supply</th><td>1,000,000,000,000,000 SYPE</td></tr>
+                <tr><th>Initial Supply</th><td>0 SYPE</td></tr>
+                <tr><th>Contract Address</th><td>0x0cd461B4897106f86F59b43fcF38Cfc11081b6A8</td></tr>
+            </table>
+            <p>All SYPE tokens are minted through the mining process, starting from an initial supply of zero. Tokens are generated from the zero address (`0x000...000`) upon reward claims, ensuring a fair and decentralized distribution.</p>
+            <h3>Mining Mechanism</h3>
+            <ul>
+                <li><strong>NFT Verification</strong>: Users verify ownership of eligible NFTs (from the NFT contract at <span class="highlight">0xEe9759A75364AFe3385e01Fa530d529bFE9Db7B2</span>) to participate in mining.</li>
+                <li><strong>Reward Rate</strong>: Each verified NFT generates 500 SYPE per block.</li>
+                <li><strong>Limit</strong>: Each address can verify up to 200 NFTs.</li>
+                <li><strong>Dynamic Verification</strong>: Upon NFT transfer, the new owner must re-verify the NFT to claim rewards, invalidating the previous owner’s verification.</li>
+            </ul>
+            <p>The total supply is capped at 1 quadrillion SYPE, ensuring long-term sustainability. Rewards are minted only when claimed, preventing premature inflation.</p>
+        </div>
+
+        <div class="section">
+            <h2>Core Features</h2>
+            <h3>NFT-Based Mining</h3>
+            <p>Users interact with the Sype smart contract to verify their NFTs. The contract checks:</p>
+            <ul>
+                <li>Ownership via the NFT contract’s `ownerOf` function.</li>
+                <li>Eligibility based on a predefined whitelist managed by the contract owner.</li>
+                <li>Compliance with the 200-NFT-per-address limit.</li>
+            </ul>
+            <p>Once verified, the NFT begins generating rewards at 500 SYPE per block until the NFT is transferred or the maximum supply is reached.</p>
+            <h3>Reward Claiming</h3>
+            <p>Users can claim accumulated rewards at any time by calling the `claimRewards` function. Rewards are calculated based on the number of verified NFTs, blocks since the last claim, and the reward rate. Claimed tokens are minted from the zero address, ensuring transparency.</p>
+            <h3>NFT Transfer Handling</h3>
+            <p>When an NFT is transferred, the new owner must call `verifyNFT` to start mining rewards. The previous owner’s verification is automatically removed, ensuring rewards follow the current NFT holder.</p>
+            <h3>Query Functions</h3>
+            <p>The Sype contract provides robust query capabilities:</p>
+            <ul>
+                <li><strong>User Information</strong>: Retrieve balance, verified NFT count, pending rewards, and last claim block via `getAddressInfo`.</li>
+                <li><strong>Verified NFTs</strong>: List a user’s verified NFTs with `getVerifiedNFTs`.</li>
+                <li><strong>All Verifications</strong>: Paginated query of all verified NFTs using `getAllVerifiedNFTs` and `getAllVerifiedNFTsCount`.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Technical Details</h2>
+            <h3>Smart Contract</h3>
+            <p>The Sype contract is implemented in Solidity (version ^0.8.20) and inherits from OpenZeppelin’s ERC20, Ownable, and ReentrancyGuard libraries for security and standardization.</p>
+            <table class="table">
+                <tr><th>Contract Address</th><td>0x0cd461B4897106f86F59b43fcF38Cfc11081b6A8</td></tr>
+                <tr><th>NFT Contract Address</th><td>0xEe9759A75364AFe3385e01Fa530d529bFE9Db7B2</td></tr>
+                <tr><th>Blockchain</th><td>Shibarium (Chain ID: 109)</td></tr>
+                <tr><th>Standard</th><td>ERC-20 (SYPE), ERC-721 (NFTs)</td></tr>
+            </table>
+            <h3>Security Features</h3>
+            <ul>
+                <li><strong>Reentrancy Protection</strong>: Uses `ReentrancyGuard` to prevent reentrancy attacks in `verifyNFT` and `claimRewards`.</li>
+                <li><strong>Ownership Control</strong>: Whitelist management is restricted to the contract owner via `Ownable`.</li>
+                <li><strong>Supply Cap</strong>: Minting is capped at 1 quadrillion SYPE to prevent overflow.</li>
+                <li><strong>Input Validation</strong>: Ensures NFT ownership and whitelist status before verification.</li>
+            </ul>
+            <h3>Gas Optimization</h3>
+            <p>The contract optimizes gas usage through efficient array operations (e.g., swapping and popping for removals) and paginated queries to reduce on-chain data retrieval costs.</p>
+        </div>
+
+        <div class="section">
+            <h2>Roadmap</h2>
+            <ul>
+                <li><strong>Q2 2025</strong>: Deployment of Sype contract on Shibarium, initial NFT whitelist setup, and DApp launch for user interaction.</li>
+                <li><strong>Q3 2025</strong>: Expansion of NFT whitelist to include additional collections, integration with Shibarium ecosystem partners.</li>
+                <li><strong>Q4 2025</strong>: Introduction of community governance features, enabling SYPE holders to propose and vote on whitelist updates.</li>
+                <li><strong>2026</strong>: Exploration of cross-chain compatibility and enhanced reward mechanisms to sustain long-term engagement.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Risks and Considerations</h2>
+            <ul>
+                <li><strong>Reward Sustainability</strong>: With a high reward rate (500 SYPE/block/NFT), the maximum supply may be reached quickly if many NFTs are verified. Continuous monitoring is required.</li>
+                <li><strong>NFT Transfer Dependency</strong>: Users must manually re-verify NFTs after transfers, which may lead to temporary reward accrual by previous owners.</li>
+                <li><strong>Gas Costs</strong>: While Shibarium offers low fees, frequent verifications and claims may incur cumulative costs.</li>
+                <li><strong>Smart Contract Risks</strong>: Despite security measures, vulnerabilities may exist. Audits are recommended before widespread adoption.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Conclusion</h2>
+            <p>Sype redefines NFT utility by transforming digital collectibles into productive assets through a decentralized mining protocol on Shibarium. By incentivizing NFT ownership with SYPE rewards, Sype strengthens the Shibarium ecosystem, encourages community participation, and sets a precedent for innovative tokenomics. We invite NFT holders to join the Sype ecosystem and start mining the future of Shibarium.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        Powered by <a href="https://shibarium.shib.io/" target="_blank">Shibarium</a> | Sype Team © 2025
+    </div>
+</body>
+</html>
