@@ -172,7 +172,7 @@
                 <tr><th>Decimals</th><td>18</td></tr>
                 <tr><th>Maximum Supply</th><td>1,000,000,000,000,000 SYPE</td></tr>
                 <tr><th>Initial Supply</th><td>0 SYPE</td></tr>
-                <tr><th>Contract Address</th><td>0xFFEb27BEA680a1eDEcaB3D45cC8273ab438cb0CA0</td></tr>
+                <tr><th>Contract Address</th><td>0xFFEb27BEA680feDEcaB3D45c8273ab438cb820CA</td></tr>
             </table>
             <p>All SYPE tokens are minted through the mining process, starting from an initial supply of zero. Tokens are generated from the zero address (`0x000...000`) upon reward claims, ensuring a fair and decentralized distribution.</p>
             <h3>Mining Mechanism</h3>
@@ -221,7 +221,7 @@
             <h3>Security Features</h3>
             <ul>
                 <li><strong>Reentrancy Protection</strong>: Uses `ReentrancyGuard` to prevent reentrancy attacks in `verifyNFT` and `claimRewards`.</li>
-                <li><strong>Ownership Control</strong>: Whitelist management is restricted to the contract owner via `Ownable`, with addresses like WoofSwap (<span class="highlight">0x2F3d45EA2E14A384fb9f1314b65Daa05035c91FD</span>) whitelisted.</li>
+                <li><strong>Ownership Control</strong>: Whitelist management is restricted to the contract owner via `Ownable`, with addresses like WoofSwap whitelisted.</li>
                 <li><strong>Supply Cap</strong>: Minting is capped at 1 quadrillion SYPE to prevent overflow.</li>
                 <li><strong>Input Validation</strong>: Ensures NFT ownership and whitelist status before verification.</li>
             </ul>
