@@ -121,7 +121,7 @@
             margin-bottom: 12px;
             color: #FF8C00;
         }
-        .card-content p.description {
+        .card-content .description p {
             font-size: 0.9rem;
             color: #B0B0B0;
             margin-bottom: 16px;
@@ -326,8 +326,8 @@
     <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
     <script>
         let web3, account;
-        const contractAddress = "0x0cd461B4897106f86F59b43fcF38Cfc11081b6A8";
-        const nftContractAddress = "0xEe9759A75364AFe3385e01Fa530d529bFE9Db7B2";
+        const contractAddress = "0xFFEb27BEA680a1eDEcaB3D45cC8273ab438cb0CA0";
+        const nftContractAddress = "0xEe9759A75364AFe3385e01Fa530b529bFE9Db7B2";
         const shibarium = {
             chainId: "0x6d",
             chainName: "Shibarium",
@@ -462,7 +462,7 @@
                     </div>
                     <div class="card-content">
                         <h4>SYPE Mining</h4>
-                        <p class="description">Verify your NFTs to mine SYPE tokens on Shibarium. Each verified NFT earns 500 SYPE per block, up to 200 NFTs per address.</p>
+                        <p class="description">Verify your NFTs to mine SYPE tokens on Shibarium. Each verified NFT earns 50 SYPE per block, up to 200 NFTs per address.</p>
                     </div>
                     <div class="action-section">
                         <div class="action-box">
@@ -577,7 +577,12 @@
                 showStatus("NFT verified successfully!");
                 await loadActionCard();
             } catch (e) {
-                const msg = e.code === 4001 ? "User rejected transaction." : e.message.includes("revert") ? "Verification failed: Invalid NFT, not owned, or already verified." : e.message;
+                const msg = e.code === 4001 ? "User rejected transaction." :
+                            e.message.includes("Not NFT owner") ? "You do not own this NFT." :
+                            e.message.includes("Uploader not whitelisted") ? "NFT uploader is not whitelisted." :
+                            e.message.includes("Max NFT verifications reached") ? "Maximum NFT verification limit reached." :
+                            e.message.includes("NFT already verified") ? "NFT already verified by this address." :
+                            `Error: ${e.message}`;
                 showStatus(`Verification failed: ${msg}`, true);
             } finally {
                 button.classList.remove("loading");
@@ -604,7 +609,9 @@
                 showStatus("Rewards claimed successfully!");
                 await loadActionCard();
             } catch (e) {
-                const msg = e.code === 4001 ? "User rejected transaction." : e.message.includes("revert") ? "No rewards available." : e.message;
+                const msg = e.code === 4001 ? "User rejected transaction." :
+                            e.message.includes("No rewards to claim") ? "No rewards available." :
+                            `Error: ${e.message}`;
                 showStatus(`Claim failed: ${msg}`, true);
             } finally {
                 button.classList.remove("loading");
@@ -615,7 +622,7 @@
         async function updateAllVerifiedNFTs(card, contract, page, pageSize, totalCount) {
             try {
                 const allVerifiedNFTs = await contract.methods.getAllVerifiedNFTs(page, pageSize).call();
-                const list = allVerifiedNFTs.length ? allVerifiedNFTs.map(nft => `<li>Verifier: ${shortenAddress(nft.verifier)}, NFT ID: ${nft.nftId}</li>`).join("") : "<li>No verified NFTs</li>";
+                const list = allVerifiedNFTs.length ? allVerifiedNFTs.map(nft => `<li>Verifier: ${shortenAddress(nft.verifier)}, NFT ID: ${nft.nftId}</li>`).join("") : "<li>No verified NFTs.</li>";
                 card.querySelector("#allVerifiedNFTsList").innerHTML = list;
                 card.querySelector("#prevPageButton").disabled = page === 0;
                 card.querySelector("#nextPageButton").disabled = page * pageSize + allVerifiedNFTs.length >= totalCount;
@@ -624,7 +631,7 @@
             }
         }
 
-        document.getElementById("connectWalletButton").addEventListener("click", connectWallet);
+        document.getElementById("connectWalletButton").add Laureate("click", connectWallet);
         window.addEventListener("load", async () => {
             if (!window.location.protocol.includes("http")) {
                 showStatus('Please run via server (e.g., "npx serve").', true);
