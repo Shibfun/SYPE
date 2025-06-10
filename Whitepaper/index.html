@@ -152,12 +152,12 @@
 
         <div class="section">
             <h2>Abstract</h2>
-            <p>Sype is a decentralized token protocol deployed on the Shibarium blockchain, designed to incentivize NFT ownership through a unique mining mechanism. By verifying eligible NFTs, users can mine SYPE tokens at a rate of 500 SYPE per block per verified NFT, with a maximum of 200 NFTs per address. Sype leverages the efficiency and low-cost transactions of Shibarium to create a seamless and rewarding experience for NFT holders, fostering community engagement and economic activity within the Shibarium ecosystem.</p>
+            <p>Sype is a decentralized token protocol deployed on the Shibarium blockchain, designed to incentivize NFT ownership through a unique mining mechanism. By verifying eligible NFTs, users can mine SYPE tokens at a rate of 50 SYPE per block per verified NFT, with a maximum of 200 NFTs per address. Sype leverages the efficiency and low-cost transactions of Shibarium to create a seamless and rewarding experience for NFT holders, fostering community engagement and economic activity within the Shibarium ecosystem.</p>
         </div>
 
         <div class="section">
             <h2>Introduction</h2>
-            <p>The rise of Non-Fungible Tokens (NFTs) has transformed digital ownership, enabling unique assets to be traded and collected on blockchain networks. Sype introduces an innovative approach to NFT utility by allowing holders to mine SYPE tokens, a native ERC-20 token on Shibarium, through NFT verification. This whitepaper outlines the vision, mechanics, technical details, and roadmap of the Sype protocol, deployed at contract address <span class="highlight">0x0cd461B4897106f86F59b43fcF38Cfc11081b6A8</span>.</p>
+            <p>The rise of Non-Fungible Tokens (NFTs) has transformed digital ownership, enabling unique assets to be traded and collected on blockchain networks. Sype introduces an innovative approach to NFT utility by allowing holders to mine SYPE tokens, a native ERC-20 token on Shibarium, through NFT verification. This whitepaper outlines the vision, mechanics, technical details, and roadmap of the Sype protocol, deployed at contract address <span class="highlight">0xFFEb27BEA680a1eDEcaB3D45cC8273ab438cb0CA0</span>.</p>
             <h3>Shibarium: The Foundation</h3>
             <p>Shibarium, a layer-2 scaling solution for Ethereum, offers low transaction fees and high throughput, making it an ideal platform for Sype. By leveraging Shibarium’s infrastructure, Sype ensures cost-effective interactions for users, enabling widespread adoption of its NFT mining model.</p>
         </div>
@@ -172,13 +172,13 @@
                 <tr><th>Decimals</th><td>18</td></tr>
                 <tr><th>Maximum Supply</th><td>1,000,000,000,000,000 SYPE</td></tr>
                 <tr><th>Initial Supply</th><td>0 SYPE</td></tr>
-                <tr><th>Contract Address</th><td>0x0cd461B4897106f86F59b43fcF38Cfc11081b6A8</td></tr>
+                <tr><th>Contract Address</th><td>0xFFEb27BEA680a1eDEcaB3D45cC8273ab438cb0CA0</td></tr>
             </table>
             <p>All SYPE tokens are minted through the mining process, starting from an initial supply of zero. Tokens are generated from the zero address (`0x000...000`) upon reward claims, ensuring a fair and decentralized distribution.</p>
             <h3>Mining Mechanism</h3>
             <ul>
-                <li><strong>NFT Verification</strong>: Users verify ownership of eligible NFTs (from the NFT contract at <span class="highlight">0xEe9759A75364AFe3385e01Fa530d529bFE9Db7B2</span>) to participate in mining.</li>
-                <li><strong>Reward Rate</strong>: Each verified NFT generates 500 SYPE per block.</li>
+                <li><strong>NFT Verification</strong>: Users verify ownership of eligible NFTs (from the NFT contract at <span class="highlight">0xEe9759A75364AFe3385e01Fa530d529bFE9Db7B2</span>) to participate in mining. Eligible NFTs must be uploaded by whitelisted addresses, such as WoofSwap (<span class="highlight">0x2F3d45EA2E14A384fb9f1314b65Daa05035c91FD</span>).</li>
+                <li><strong>Reward Rate</strong>: Each verified NFT generates 50 SYPE per block.</li>
                 <li><strong>Limit</strong>: Each address can verify up to 200 NFTs.</li>
                 <li><strong>Dynamic Verification</strong>: Upon NFT transfer, the new owner must re-verify the NFT to claim rewards, invalidating the previous owner’s verification.</li>
             </ul>
@@ -191,10 +191,10 @@
             <p>Users interact with the Sype smart contract to verify their NFTs. The contract checks:</p>
             <ul>
                 <li>Ownership via the NFT contract’s `ownerOf` function.</li>
-                <li>Eligibility based on a predefined whitelist managed by the contract owner.</li>
+                <li>Eligibility based on a predefined whitelist managed by the contract owner, including addresses like WoofSwap (<span class="highlight">0x2F3d45EA2E14A384fb9f1314b65Daa05035c91FD</span>).</li>
                 <li>Compliance with the 200-NFT-per-address limit.</li>
             </ul>
-            <p>Once verified, the NFT begins generating rewards at 500 SYPE per block until the NFT is transferred or the maximum supply is reached.</p>
+            <p>Once verified, the NFT begins generating rewards at 50 SYPE per block until the NFT is transferred or the maximum supply is reached.</p>
             <h3>Reward Claiming</h3>
             <p>Users can claim accumulated rewards at any time by calling the `claimRewards` function. Rewards are calculated based on the number of verified NFTs, blocks since the last claim, and the reward rate. Claimed tokens are minted from the zero address, ensuring transparency.</p>
             <h3>NFT Transfer Handling</h3>
@@ -213,7 +213,7 @@
             <h3>Smart Contract</h3>
             <p>The Sype contract is implemented in Solidity (version ^0.8.20) and inherits from OpenZeppelin’s ERC20, Ownable, and ReentrancyGuard libraries for security and standardization.</p>
             <table class="table">
-                <tr><th>Contract Address</th><td>0x0cd461B4897106f86F59b43fcF38Cfc11081b6A8</td></tr>
+                <tr><th>Contract Address</th><td>0xFFEb27BEA680feDEcaB3D45c8273ab438cb820CA</td></tr>
                 <tr><th>NFT Contract Address</th><td>0xEe9759A75364AFe3385e01Fa530d529bFE9Db7B2</td></tr>
                 <tr><th>Blockchain</th><td>Shibarium (Chain ID: 109)</td></tr>
                 <tr><th>Standard</th><td>ERC-20 (SYPE), ERC-721 (NFTs)</td></tr>
@@ -221,7 +221,7 @@
             <h3>Security Features</h3>
             <ul>
                 <li><strong>Reentrancy Protection</strong>: Uses `ReentrancyGuard` to prevent reentrancy attacks in `verifyNFT` and `claimRewards`.</li>
-                <li><strong>Ownership Control</strong>: Whitelist management is restricted to the contract owner via `Ownable`.</li>
+                <li><strong>Ownership Control</strong>: Whitelist management is restricted to the contract owner via `Ownable`, with addresses like WoofSwap (<span class="highlight">0x2F3d45EA2E14A384fb9f1314b65Daa05035c91FD</span>) whitelisted.</li>
                 <li><strong>Supply Cap</strong>: Minting is capped at 1 quadrillion SYPE to prevent overflow.</li>
                 <li><strong>Input Validation</strong>: Ensures NFT ownership and whitelist status before verification.</li>
             </ul>
@@ -240,12 +240,9 @@
         </div>
 
         <div class="section">
-            <h2>Current whitelist</h2>
+            <h2>Current Whitelist</h2>
             <ul>
-                <li><strong><a href="https://hypeit.app/posts/cmbmxnxt700k8pbzd19jg0ze9" target="_blank" rel="noopener noreferrer">48</a></strong></li>
-                <li><strong><a href="https://hypeit.app/posts/cmboqy3dn04iypbzdd0ixcsiz" target="_blank" rel="noopener noreferrer">164</a></strong></li>
-                <li><strong><a href="https://hypeit.app/posts/cmbop3e000490pbzdyvmkq3kh" target="_blank" rel="noopener noreferrer">153</a></strong></li>
-                <li><strong><a href="https://hypeit.app/posts/cmbpmy50m07dopbzd7gabtjkp" target="_blank" rel="noopener noreferrer">244</a></strong></li>
+                <li><strong>WoofSwap</strong> 0x2F3d45EA2E14A384fb9f1314b65Daa05035c91FD </li>
             </ul>
         </div>
 
